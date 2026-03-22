@@ -3,7 +3,7 @@
  * Plugin Name: XC Scribe
  * Plugin URI: https://xcscribe.com
  * Description: AI-powered content generation for WordPress — product descriptions (WooCommerce) and blog posts.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * Author: TheXtraCode

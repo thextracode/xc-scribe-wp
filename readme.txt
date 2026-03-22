@@ -3,7 +3,7 @@ Contributors: thextracode
 Tags: ai, content, woocommerce, product descriptions, blog
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -81,7 +81,7 @@ This compiles `src/main.tsx` and related components into `assets/admin.js` and `
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.0.2 =
 * Fix: Per-product permission checks — REST routes now verify `edit_post` capability for the specific product, not just the general `edit_posts` capability
 * Fix: Menu position lowered from 4 to 79 (just above Settings) to avoid displacing core WordPress menu items
 * Fix: Include human-readable source code for compiled `assets/admin.js` in the `src/` directory
@@ -100,7 +100,7 @@ This compiles `src/main.tsx` and related components into `assets/admin.js` and `
 
 == Upgrade Notice ==
 
-= 1.0.1 =
+= 1.0.2 =
 Addresses WordPress.org plugin review feedback. Improved security with per-product permission checks, WPCS compliance, and source code included.
 
 = 1.0.0 =
