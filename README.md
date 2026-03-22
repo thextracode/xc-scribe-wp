@@ -1,72 +1,69 @@
 # XC Scribe — WordPress Plugin
 
-AI-powered content generation for WordPress. Product descriptions (WooCommerce) and blog posts.
+AI-powered content generation for WordPress. Product descriptions (requires WooCommerce) and blog posts.
 
-## Features
+## Install (ZIP)
 
-- **Product Descriptions** — Generate optimized WooCommerce product descriptions from product data (title, category, attributes, images)
-- **Blog Post Drafts** — Generate full blog drafts from a topic, created as WordPress drafts for review
-- **Multi-language** — English, Serbian, German, French, Spanish, and more
-- **Tone Control** — Professional, casual, or custom instructions
-
-## Requirements
-
-- WordPress 6.0+
-- PHP 7.4+
-- WooCommerce (optional, for product descriptions)
-- XC Scribe account and API key ([xcscribe.com](https://xcscribe.com/) — free tier available)
-
-## Install
-
-**From WordPress.org:**
-
-Search for "XC Scribe" in Plugins > Add New.
-
-**From ZIP:**
-
-1. Download the latest release
-2. WordPress Admin > Plugins > Add New > Upload Plugin
-3. Activate
+1. Build the plugin ZIP:
+   ```bash
+   cd content_automation && ./plugins/wp/build.sh
+   ```
+2. In WordPress Admin:
+   - Plugins → Add New → Upload Plugin
+   - Select `xc-scribe-wp.zip` and install/activate
 
 ## Configure
 
-1. Go to **XC Scribe** in the admin sidebar
-2. Enter your API key
-3. Click **Save**, then **Test connection**
+1. WordPress Admin → **XC Scribe**
+2. Enter your **API key** (from your XC Scribe account)
+3. Click **Save**
+4. Click **Test connection** — confirm it shows plan tier + balance
 
 ## Usage
 
-**Blog drafts:** XC Scribe > Blog Generator > enter topic > Generate
-
-**Product descriptions (WooCommerce):** Edit product > XC Scribe meta box > Generate
+- **Blog drafts** (any WordPress site):
+  - WordPress Admin → **XC Scribe → Blog Generator**
+  - Enter a topic → **Generate draft post**
+  - You'll be redirected to the draft post editor
+- **Product descriptions** (requires WooCommerce):
+  - Edit a WooCommerce product → find the **XC Scribe** meta box → **Generate with XC Scribe**
+  - Generated content is inserted into the product description editor (does not auto-save)
 
 ## Development
 
-### Project structure
-
-```
-xc-scribe.php    # Plugin entry point, REST API routes, admin setup
-assets/
-  admin.js       # Bundled admin UI (built from source)
-  admin.css      # Admin styles
-readme.txt       # WordPress.org readme
-```
-
 ### Dev mode
 
-Add to `wp-config.php` to show the API base URL field (for local/staging API):
+To show the API base URL field in settings (for pointing to a local/staging API), add to `wp-config.php`:
 
 ```php
 define('XC_SCRIBE_DEV_MODE', true);
 ```
 
-## External Service
+Production installs should **not** set this — the plugin defaults to `https://api.xcscribe.com`.
 
-This plugin connects to the [XC Scribe API](https://xcscribe.com/) to generate content. Data is only sent when you click a generate button.
+### Build
 
-- [Terms of Service](https://xcscribe.com/terms)
-- [Privacy Policy](https://xcscribe.com/privacy)
+```bash
+cd content_automation && ./plugins/wp/build.sh
+```
 
-## License
+Output: `plugins/wp/dist/xc-scribe-wp.zip`
 
-GPLv2 or later. See [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html).
+## Release checklist
+
+1. Remove or verify `XC_SCRIBE_DEV_MODE` is **not** set — API URL field must be hidden
+2. Default `XC_SCRIBE_API_URL` points to `https://api.xcscribe.com`
+3. Update plugin version in `xc-scribe.php`
+4. Run `./plugins/wp/build.sh`
+5. Install ZIP on a staging WP site and smoke test:
+   - Settings: save API key + test connection
+   - Blog: generate draft and verify redirect
+   - Products (WooCommerce): generate description from product edit page
+6. Verify plugin works on non-WooCommerce WordPress (no errors, product features hidden)
+7. Publish the ZIP
+
+## Troubleshooting
+
+- **401 Invalid API key** — verify the key is active in your XC Scribe account, re-save
+- **402 Insufficient balance** — top up at `https://app.xcscribe.com/settings/billing`
+- **Admin UI not showing** — rebuild assets with `./plugins/wp/build.sh`

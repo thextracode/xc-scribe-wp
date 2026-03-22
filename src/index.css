@@ -1,0 +1,643 @@
+/* ─── XC Scribe Design Tokens ─── */
+:root {
+  --xc-primary: #0064f0;
+  --xc-primary-hover: #0052cc;
+  --xc-primary-fg: #ffffff;
+  --xc-surface: #ffffff;
+  --xc-text: #1e1e1e;
+  --xc-text-secondary: #646970;
+  --xc-border: #e0e0e0;
+  --xc-success: #00a32a;
+  --xc-error: #d63638;
+  --xc-warning: #dba617;
+  --xc-disabled-bg: #f6f7f7;
+  --xc-disabled-text: #a7aaad;
+  --xc-radius: 8px;
+  --xc-radius-sm: 4px;
+}
+
+/* ─── Page Wrapper ─── */
+.xc-scribe-wrap {
+  margin: 0;
+}
+
+/* ─── Header Bar ─── */
+.xc-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  background: var(--xc-surface);
+  border: 1px solid var(--xc-border);
+  border-radius: var(--xc-radius) var(--xc-radius) 0 0;
+}
+
+.xc-header__title {
+  flex: 1;
+  margin: 0;
+}
+
+.xc-header__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.xc-header__logo-pen {
+  width: 20px;
+  height: 20px;
+  color: var(--xc-primary);
+}
+
+.xc-header__logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--xc-primary);
+  color: var(--xc-primary-fg);
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.xc-header__logo-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--xc-text);
+}
+
+.xc-header__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 12px;
+  background: var(--xc-primary);
+  color: var(--xc-primary-fg);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.xc-header__balance {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 16px;
+  background: var(--xc-disabled-bg);
+  color: var(--xc-text);
+  border: 1px solid var(--xc-border);
+}
+
+.xc-header__balance-label {
+  color: var(--xc-text-secondary);
+}
+
+/* ─── Tab Navigation ─── */
+.xc-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--xc-border);
+  background: var(--xc-surface);
+  border-left: 1px solid var(--xc-border);
+  border-right: 1px solid var(--xc-border);
+  padding: 0 24px;
+}
+
+.xc-tabs__tab {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--xc-text-secondary);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+
+.xc-tabs__tab:hover {
+  color: var(--xc-text);
+}
+
+.xc-tabs__tab--active {
+  color: var(--xc-text);
+  border-bottom-color: var(--xc-primary);
+}
+
+.xc-tabs__tab--disabled {
+  color: var(--xc-disabled-text);
+  cursor: default;
+}
+
+/* ─── Tab Content ─── */
+.xc-content {
+  padding: 24px;
+  background: var(--xc-surface);
+  border: 1px solid var(--xc-border);
+  border-top: none;
+  border-radius: 0 0 var(--xc-radius) var(--xc-radius);
+}
+
+/* ─── Stat Cards Grid ─── */
+.xc-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 782px) {
+  .xc-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+.xc-stat {
+  padding: 20px;
+  border: 1px solid var(--xc-border);
+  border-radius: var(--xc-radius);
+  background: var(--xc-surface);
+}
+
+.xc-stat__label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--xc-text-secondary);
+  margin: 0 0 8px;
+}
+
+.xc-stat__value {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--xc-text);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.xc-stat__value--success {
+  color: var(--xc-success);
+}
+
+.xc-stat__value--error {
+  color: var(--xc-error);
+}
+
+.xc-stat__value--small {
+  font-size: 16px;
+}
+
+/* ─── Section ─── */
+.xc-section {
+  margin-bottom: 24px;
+}
+
+.xc-section:last-child {
+  margin-bottom: 0;
+}
+
+.xc-section__title {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--xc-text-secondary);
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--xc-border);
+}
+
+/* ─── Card (inner card for sections) ─── */
+.xc-card {
+  padding: 20px;
+  border: 1px solid var(--xc-border);
+  border-radius: var(--xc-radius);
+  background: var(--xc-surface);
+}
+
+.xc-card + .xc-card {
+  margin-top: 12px;
+}
+
+/* ─── Form Controls ─── */
+.xc-form-group {
+  margin-bottom: 16px;
+}
+
+.xc-form-group:last-child {
+  margin-bottom: 0;
+}
+
+.xc-form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--xc-text);
+  margin-bottom: 6px;
+}
+
+.xc-form-group .xc-hint {
+  font-size: 12px;
+  color: var(--xc-text-secondary);
+  margin: 4px 0 0;
+}
+
+.xc-input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid var(--xc-border);
+  border-radius: var(--xc-radius-sm);
+  background: var(--xc-surface);
+  color: var(--xc-text);
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.xc-input:focus {
+  outline: none;
+  border-color: var(--xc-primary);
+  box-shadow: 0 0 0 1px var(--xc-primary);
+}
+
+.xc-select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid var(--xc-border);
+  border-radius: var(--xc-radius-sm);
+  background: var(--xc-surface);
+  color: var(--xc-text);
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.xc-select:focus {
+  outline: none;
+  border-color: var(--xc-primary);
+  box-shadow: 0 0 0 1px var(--xc-primary);
+}
+
+textarea.xc-input {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ─── Buttons ─── */
+.xc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  height: 36px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--xc-radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.xc-btn--primary {
+  background: var(--xc-primary);
+  color: var(--xc-primary-fg);
+  border-color: var(--xc-primary);
+}
+
+.xc-btn--primary:hover {
+  background: var(--xc-primary-hover);
+  border-color: var(--xc-primary-hover);
+}
+
+.xc-btn--secondary {
+  background: var(--xc-surface);
+  color: var(--xc-primary);
+  border-color: var(--xc-primary);
+}
+
+.xc-btn--secondary:hover {
+  background: #f0f5ff;
+}
+
+.xc-btn--small {
+  height: 30px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.xc-btn:disabled {
+  background: var(--xc-disabled-bg);
+  color: var(--xc-disabled-text);
+  border-color: var(--xc-border);
+  cursor: not-allowed;
+}
+
+.xc-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ─── Notices ─── */
+.xc-notice {
+  padding: 12px 16px;
+  border-radius: var(--xc-radius-sm);
+  font-size: 13px;
+  margin-top: 16px;
+}
+
+.xc-notice--success {
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+.xc-notice--error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.xc-notice--warning {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+}
+
+.xc-notice--info {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+/* ─── Activity List ─── */
+.xc-activity {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.xc-activity__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--xc-border);
+  font-size: 13px;
+}
+
+.xc-activity__item:last-child {
+  border-bottom: none;
+}
+
+.xc-activity__type {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--xc-radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  background: #eff6ff;
+  color: var(--xc-primary);
+}
+
+.xc-activity__type--product {
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.xc-activity__title {
+  flex: 1;
+  color: var(--xc-text);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.xc-activity__cost {
+  color: var(--xc-text-secondary);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.xc-activity__date {
+  color: var(--xc-text-secondary);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.xc-activity__link {
+  color: var(--xc-primary);
+  text-decoration: none;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.xc-activity__link:hover {
+  text-decoration: underline;
+}
+
+/* ─── WooCommerce Teaser ─── */
+.xc-teaser {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--xc-disabled-text);
+}
+
+.xc-teaser__icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+
+.xc-teaser__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--xc-text);
+  margin: 0 0 8px;
+}
+
+.xc-teaser__desc {
+  font-size: 13px;
+  color: var(--xc-text-secondary);
+  margin: 0 0 4px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.xc-teaser__req {
+  font-size: 12px;
+  color: var(--xc-disabled-text);
+  font-style: italic;
+}
+
+/* ─── Settings Inline ─── */
+.xc-settings-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.xc-settings-row:last-child {
+  margin-bottom: 0;
+}
+
+.xc-settings-row label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--xc-text);
+  min-width: 100px;
+}
+
+/* ─── Spinner ─── */
+@keyframes xc-spin {
+  to { transform: rotate(360deg); }
+}
+
+.xc-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--xc-border);
+  border-top-color: var(--xc-primary);
+  border-radius: 50%;
+  animation: xc-spin 0.6s linear infinite;
+}
+
+/* ─── Empty State ─── */
+.xc-empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--xc-text-secondary);
+  font-size: 13px;
+}
+
+/* ─── Success Result Card ─── */
+.xc-result {
+  padding: 16px 20px;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--xc-radius);
+  background: #ecfdf5;
+  margin-top: 16px;
+}
+
+.xc-result__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #166534;
+  margin: 0 0 8px;
+}
+
+.xc-result__meta {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: #166534;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.xc-result__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--xc-primary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.xc-result__link:hover {
+  text-decoration: underline;
+}
+
+/* ─── About Features List ─── */
+.xc-about-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.xc-about-features li {
+  padding: 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--xc-text);
+  border-bottom: 1px solid var(--xc-border);
+}
+
+.xc-about-features li:last-child {
+  border-bottom: none;
+}
+
+/* ─── Dashboard Columns ─── */
+.xc-dashboard-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 1200px) {
+  .xc-dashboard-cols {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.xc-dashboard-cols > .xc-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.xc-dashboard-cols > .xc-section > .xc-card {
+  flex: 1;
+}
+
+/* ─── Blog Generator Form ─── */
+.xc-blog-form {
+  width: 100%;
+}
+
+.xc-blog-form__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 1200px) {
+  .xc-blog-form {
+    max-width: 50%;
+  }
+
+  .xc-blog-form__row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ─── WordPress admin overrides ─── */
+.xc-scribe-wrap .xc-header,
+.xc-scribe-wrap .xc-tabs,
+.xc-scribe-wrap .xc-content {
+  box-sizing: border-box;
+}
+
+.xc-scribe-wrap * {
+  box-sizing: border-box;
+}
