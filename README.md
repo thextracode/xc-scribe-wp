@@ -16,16 +16,17 @@ release-ready plugin contents for WordPress.org review.
 
 ## Install the ZIP
 
-1. Build the plugin:
+This repository contains the plugin source and release contents; it does not
+include a prebuilt ZIP. Obtain `xc-scribe-wp.zip` from the release channel, or
+build it from the main XC AI workspace:
 
-   ```bash
-   cd content_automation
-   ./plugins/wp/build.sh
-   ```
+```bash
+cd /path/to/xc-ai/content_automation
+./plugins/wp/build.sh
+```
 
-2. In WordPress Admin, go to **Plugins → Add New → Upload Plugin**.
-3. Select `content_automation/plugins/wp/dist/xc-scribe-wp.zip`, install it,
-   then activate it.
+The build output is `plugins/wp/dist/xc-scribe-wp.zip`. In WordPress Admin,
+go to **Plugins → Add New → Upload Plugin**, select that ZIP, then activate it.
 
 ## Configure and use
 
