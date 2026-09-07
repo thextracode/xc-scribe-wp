@@ -1,69 +1,92 @@
 # XC Scribe — WordPress Plugin
 
-AI-powered content generation for WordPress. Product descriptions (requires WooCommerce) and blog posts.
+AI-powered content generation for WordPress. The plugin creates blog drafts
+and, when WooCommerce is installed, product descriptions.
 
-## Install (ZIP)
+## Repository layout
 
-1. Build the plugin ZIP:
+- `xc-scribe.php` — WordPress plugin bootstrap and REST API implementation.
+- `assets/` — compiled WordPress admin assets.
+- `src/` — readable React and TypeScript source for the admin UI.
+- `readme.txt` — WordPress.org metadata.
+
+The build and smoke-test configuration are maintained in the main XC AI
+workspace under `content_automation/plugins/wp`. This repository mirrors the
+release-ready plugin contents for WordPress.org review.
+
+## Install the ZIP
+
+1. Build the plugin:
+
    ```bash
-   cd content_automation && ./plugins/wp/build.sh
+   cd content_automation
+   ./plugins/wp/build.sh
    ```
-2. In WordPress Admin:
-   - Plugins → Add New → Upload Plugin
-   - Select `xc-scribe-wp.zip` and install/activate
 
-## Configure
+2. In WordPress Admin, go to **Plugins → Add New → Upload Plugin**.
+3. Select `content_automation/plugins/wp/dist/xc-scribe-wp.zip`, install it,
+   then activate it.
 
-1. WordPress Admin → **XC Scribe**
-2. Enter your **API key** (from your XC Scribe account)
-3. Click **Save**
-4. Click **Test connection** — confirm it shows plan tier + balance
+## Configure and use
 
-## Usage
+1. Go to **WordPress Admin → XC Scribe**.
+2. Enter an API key from an XC Scribe account, save it, and run **Test
+   connection**.
 
-- **Blog drafts** (any WordPress site):
-  - WordPress Admin → **XC Scribe → Blog Generator**
-  - Enter a topic → **Generate draft post**
-  - You'll be redirected to the draft post editor
-- **Product descriptions** (requires WooCommerce):
-  - Edit a WooCommerce product → find the **XC Scribe** meta box → **Generate with XC Scribe**
-  - Generated content is inserted into the product description editor (does not auto-save)
+For blog posts, open **XC Scribe → Blog Generator**, enter a topic, and
+generate a draft. For WooCommerce products, open a product editor and use the
+**XC Scribe** meta box; generated copy is inserted into the editor and is not
+saved automatically.
 
 ## Development
 
-### Dev mode
+The build requires Node.js 22 and Yarn 1. The UI is built from the canonical
+source in the main XC AI workspace and compiled into `assets/`.
 
-To show the API base URL field in settings (for pointing to a local/staging API), add to `wp-config.php`:
+```bash
+cd content_automation
+./plugins/wp/build.sh
+```
+
+The output is `content_automation/plugins/wp/dist/xc-scribe-wp.zip`.
+
+To expose the API base URL field for local or staging use, add this to
+`wp-config.php`:
 
 ```php
 define('XC_SCRIBE_DEV_MODE', true);
 ```
 
-Production installs should **not** set this — the plugin defaults to `https://api.xcscribe.com`.
+Do not enable development mode in production. The production API defaults to
+`https://api.xcscribe.com`.
 
-### Build
+## WordPress 7.1 smoke test
+
+The test environment installs WordPress 7.1, WooCommerce, and XC Scribe.
 
 ```bash
-cd content_automation && ./plugins/wp/build.sh
+cd content_automation/plugins/wp
+docker compose -f docker-compose.test.yml up -d
+docker compose -f docker-compose.test.yml logs --no-color wpcli
 ```
 
-Output: `plugins/wp/dist/xc-scribe-wp.zip`
+Success is indicated by `WordPress + WooCommerce + XC Scribe ready!` in the
+`wpcli` logs. The local admin is available at `http://localhost:8089`.
 
 ## Release checklist
 
-1. Remove or verify `XC_SCRIBE_DEV_MODE` is **not** set — API URL field must be hidden
-2. Default `XC_SCRIBE_API_URL` points to `https://api.xcscribe.com`
-3. Update plugin version in `xc-scribe.php`
-4. Run `./plugins/wp/build.sh`
-5. Install ZIP on a staging WP site and smoke test:
-   - Settings: save API key + test connection
-   - Blog: generate draft and verify redirect
-   - Products (WooCommerce): generate description from product edit page
-6. Verify plugin works on non-WooCommerce WordPress (no errors, product features hidden)
-7. Publish the ZIP
+1. Confirm `XC_SCRIBE_DEV_MODE` is not enabled in the release environment.
+2. Update the plugin version in `xc-scribe.php` and metadata in `readme.txt`
+   when releasing a new version.
+3. Run `./plugins/wp/build.sh` with Node 22 and Yarn.
+4. Run the WordPress 7.1 smoke test above.
+5. On a staging site, verify API-key connection testing, blog draft creation,
+   WooCommerce product generation, and operation without WooCommerce.
+6. Upload the generated ZIP to the release channel.
 
 ## Troubleshooting
 
-- **401 Invalid API key** — verify the key is active in your XC Scribe account, re-save
-- **402 Insufficient balance** — top up at `https://app.xcscribe.com/settings/billing`
-- **Admin UI not showing** — rebuild assets with `./plugins/wp/build.sh`
+- **401 Invalid API key** — verify the key is active, then save it again.
+- **402 Insufficient balance** — top up at
+  `https://app.xcscribe.com/settings/billing`.
+- **Admin UI missing or stale** — rerun `./plugins/wp/build.sh`.
